@@ -3,3 +3,7 @@
 
 # Datasets
 *.txt
+
+# Model Binaries
+models/
+tokenizers/
