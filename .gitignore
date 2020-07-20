@@ -10,3 +10,5 @@ tokenizers/
 
 # Other Binaries
 *.lock
+Custom Tasks/logs/
+Custom Tasks/results/
