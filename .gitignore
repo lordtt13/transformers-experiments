@@ -2,7 +2,7 @@
 *.ipynb_checkpoints/
 
 # Datasets
-*.txt
+data/
 
 # Model Binaries
 models/
