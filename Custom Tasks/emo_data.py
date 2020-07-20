@@ -42,7 +42,6 @@ _CITATION = """\
 }
 """
 
-# TODO: Add description of the dataset here
 _DESCRIPTION = """\
 In this dataset, given a textual dialogue i.e. an utterance along with two previous turns of context, the goal was to infer the underlying emotion of the utterance by choosing from four emotion classes - Happy, Sad, Angry and Others. 
 """
@@ -87,21 +86,19 @@ class EmoDataset(nlp.GeneratorBasedBuilder):
     
     def _split_generators(self, dl_manager):
         """Returns SplitGenerators."""
-        if(not os.path.exists("emo-train.json") or self.force):
-            gdown.download(self._get_drive_url(_TRAIN_URL), "emo-train.json", quiet = True)
-        if(not os.path.exists("emo-test.json") or self.force):
-            gdown.download(self._get_drive_url(_TEST_URL), "emo-test.json", quiet = True)
+        dl_train = dl_manager.download_and_extract(self._get_drive_url(_TRAIN_URL))
+        dl_test = dl_manager.download_and_extract(self._get_drive_url(_TEST_URL))
         return [
             nlp.SplitGenerator(
                 name=nlp.Split.TRAIN,
                 gen_kwargs={
-                    "filepath": "emo-train.json",
+                    "filepath": dl_train,
                     "split": "train",
                 },
             ),
             nlp.SplitGenerator(
                 name=nlp.Split.TEST,
-                gen_kwargs={"filepath": "emo-test.json", "split": "test"},
+                gen_kwargs={"filepath": dl_test, "split": "test"},
             ),
         ]
 
